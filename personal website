@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingjun Li - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #fff;
+            background: #1a0a1f;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(45deg, #ff1493, #ff69b4, #ffc0cb, #ff1493);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 20, 147, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(255, 20, 147, 0.8), 0 0 60px rgba(255, 105, 180, 0.6); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            background: rgba(255, 20, 147, 0.15);
+            backdrop-filter: blur(20px);
+            padding: 3rem;
+            border-radius: 25px;
+            margin-bottom: 2rem;
+            border: 2px solid rgba(255, 105, 180, 0.4);
+            box-shadow: 0 8px 32px rgba(255, 20, 147, 0.3), inset 0 0 50px rgba(255, 105, 180, 0.1);
+            text-align: center;
+            animation: fadeInDown 0.8s ease, glow 3s infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 105, 180, 0.15) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        h1 {
+            background: linear-gradient(45deg, #ff1493, #ff69b4, #ffb6c1, #ff1493);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            animation: gradientShift 5s ease infinite;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 0 30px rgba(255, 20, 147, 0.5);
+        }
+
+        .tagline {
+            font-size: 1.2rem;
+            color: #ffb6c1;
+            margin-top: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .kitty-decoration {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            opacity: 0.9;
+            animation: float 3s ease-in-out infinite;
+            z-index: 10;
+        }
+
+        .kitty-left {
+            top: 20px;
+            left: 20px;
+        }
+
+        .kitty-right {
+            top: 20px;
+            right: 20px;
+            animation-delay: 1.5s;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-top: 1.5rem;
+            color: #ffb6c1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-info span {
+            background: rgba(255, 20, 147, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 105, 180, 0.4);
+            transition: all 0.3s;
+        }
+
+        .contact-info span:hover {
+            background: rgba(255, 20, 147, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .contact-info a {
+            color: #ff69b4;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-info a:hover {
+            color: #ff1493;
+        }
+
+        .download-btn {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 15px 40px;
+            background: linear-gradient(45deg, #ff1493, #ff69b4);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.4);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .download-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.6);
+        }
+
+        .download-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        nav {
+            background: rgba(255, 20, 147, 0.15);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem;
+            border-radius: 25px;
+            margin-bottom: 2rem;
+            border: 2px solid rgba(255, 105, 180, 0.4);
+            box-shadow: 0 4px 20px rgba(255, 20, 147, 0.3);
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            animation: fadeIn 1s ease;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #ffb6c1;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+            padding: 8px 20px;
+            border-radius: 15px;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #ff1493, #ff69b4);
+            transition: all 0.3s;
+            transform: translateX(-50%);
+        }
+
+        nav a:hover {
+            color: #ff1493;
+            background: rgba(255, 20, 147, 0.2);
+        }
+
+        nav a:hover::after {
+            width: 80%;
+        }
+
+        .section {
+            background: rgba(255, 20, 147, 0.15);
+            backdrop-filter: blur(20px);
+            padding: 2.5rem;
+            border-radius: 25px;
+            margin-bottom: 2rem;
+            border: 2px solid rgba(255, 105, 180, 0.4);
+            box-shadow: 0 8px 32px rgba(255, 20, 147, 0.3);
+            animation: fadeInUp 0.8s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 105, 180, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .section:hover::before {
+            left: 100%;
+        }
+
+        h2 {
+            background: linear-gradient(45deg, #ff1493, #ff69b4, #ffb6c1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+            border-bottom: 3px solid rgba(255, 20, 147, 0.5);
+            padding-bottom: 0.8rem;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(45deg, #ffb6c1, #ff69b4);
+            animation: slideRight 2s ease infinite;
+        }
+
+        @keyframes slideRight {
+            0%, 100% { left: 0; }
+            50% { left: calc(100% - 100px); }
+        }
+
+        .experience-item, .education-item {
+            margin-bottom: 2rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.15) 0%, rgba(255, 105, 180, 0.1) 100%);
+            border-radius: 20px;
+            border-left: 5px solid #ff1493;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-item::before, .education-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255, 105, 180, 0.25), transparent);
+            transition: width 0.4s;
+        }
+
+        .experience-item:hover::before, .education-item:hover::before {
+            width: 100%;
+        }
+
+        .experience-item:hover, .education-item:hover {
+            transform: translateX(15px) scale(1.02);
+            box-shadow: 0 8px 30px rgba(255, 20, 147, 0.4);
+            border-left-color: #ff69b4;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .item-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #ff69b4;
+            text-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+        }
+
+        .item-subtitle {
+            font-style: italic;
+            color: #ffb6c1;
+            margin-top: 0.3rem;
+        }
+
+        .item-date {
+            color: #ff1493;
+            font-weight: 600;
+            white-space: nowrap;
+            background: rgba(255, 20, 147, 0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 105, 180, 0.4);
+        }
+
+        ul.duties {
+            list-style: none;
+            margin-top: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        ul.duties li {
+            padding-left: 2rem;
+            margin-bottom: 0.8rem;
+            position: relative;
+            color: #e6e6fa;
+            transition: all 0.3s;
+        }
+
+        ul.duties li:hover {
+            color: #fff;
+            transform: translateX(5px);
+        }
+
+        ul.duties li:before {
+            content: "✦";
+            position: absolute;
+            left: 0;
+            color: #ff1493;
+            font-weight: bold;
+            font-size: 1.2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.7; }
+        }
+
+        .publication {
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.25) 0%, rgba(255, 20, 147, 0.2) 100%);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 105, 180, 0.4);
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .publication::after {
+            content: '📚';
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 3rem;
+            opacity: 0.1;
+            transition: all 0.3s;
+        }
+
+        .publication:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 30px rgba(255, 20, 147, 0.4);
+        }
+
+        .publication:hover::after {
+            opacity: 0.3;
+            transform: rotate(10deg);
+        }
+
+        .award {
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(255, 182, 193, 0.25) 0%, rgba(255, 105, 180, 0.25) 100%);
+            border-radius: 20px;
+            text-align: center;
+            font-size: 1.1rem;
+            border: 2px solid rgba(255, 105, 180, 0.4);
+            position: relative;
+            overflow: hidden;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .award::before {
+            content: '🏆';
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.05;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .award-title {
+            font-weight: bold;
+            color: #ff1493;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+        }
+
+        footer {
+            text-align: center;
+            padding: 3rem;
+            color: #ffb6c1;
+            margin-top: 2rem;
+            background: rgba(255, 20, 147, 0.1);
+            border-radius: 25px;
+            border: 2px solid rgba(255, 105, 180, 0.3);
+        }radius: 25px;
+            border: 2px solid rgba(138, 43, 226, 0.2);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: rgba(138, 43, 226, 0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particleFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes particleFloat {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100px) translateX(50px); opacity: 0; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .item-header {
+                flex-direction: column;
+            }
+
+            .item-date {
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <header>
+            <h1>✨ Bingjun Li ✨</h1>
+            <p class="tagline">Student Affairs & College Counseling Professional</p>
+            <div class="contact-info">
+                <span>📍 Eatontown, New Jersey</span>
+                <span>📧 <a href="mailto:s1363772@monmouth.edu">s1363772@monmouth.edu</a></span>
+                <span>📱 <a href="tel:732-841-9801">732-841-9801</a></span>
+            </div>
+            <button class="download-btn" onclick="downloadResume()">
+                <span>📄 Download My Resume</span>
+            </button>
+        </header>
+
+        <nav>
+            <ul>
+                <li><a onclick="scrollToSection('about')">About</a></li>
+                <li><a onclick="scrollToSection('education')">Education</a></li>
+                <li><a onclick="scrollToSection('experience')">Experience</a></li>
+                <li><a onclick="scrollToSection('publications')">Publications</a></li>
+                <li><a onclick="scrollToSection('awards')">Awards</a></li>
+            </ul>
+        </nav>
+
+        <section id="about" class="section">
+            <h2>About Me</h2>
+            <p style="font-size: 1.2rem; line-height: 1.9; color: #e6e6fa;">
+                Graduate student pursuing M.S.Ed. in Student Affairs and College Counseling at Monmouth University. 
+                Passionate about supporting student success through advising, international education, and research. 
+                Experienced in coordinating student programs, conducting research on cybersecurity and education, 
+                and fostering inclusive campus environments.
+            </p>
+        </section>
+
+        <section id="education" class="section">
+            <h2>Education</h2>
+            <div class="education-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-title">Monmouth University</div>
+                        <div class="item-subtitle">M.S.Ed. Student Affairs and College Counseling</div>
+                        <div style="color: #b19cd9; margin-top: 0.3rem;">📍 West Long Branch, NJ</div>
+                    </div>
+                    <div class="item-date">Fall 2023 - Present</div>
+                </div>
+            </div>
+            <div class="education-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-title">Changchun University of Technology</div>
+                        <div class="item-subtitle">B.A. English</div>
+                        <div style="color: #b19cd9; margin-top: 0.3rem;">📍 Jilin, China</div>
+                    </div>
+                    <div class="item-date">09/2018 - 06/2022</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="section">
+            <h2>Professional Experience</h2>
+            
+            <div class="experience-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-title">Student Affairs and College Counseling Intern</div>
+                        <div class="item-subtitle">Monmouth University - First Year Advising Office</div>
+                    </div>
+                    <div class="item-date">01/2025 - Present</div>
+                </div>
+                <ul class="duties">
+                    <li>Assisted students with check-in, course registration, schedule adjustments, and understanding degree requirements</li>
+                    <li>Collaborated with advisors and departments to develop effective advising strategies</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-title">Graduate Assistant - Global Education</div>
+                        <div class="item-subtitle">Monmouth University</div>
+                    </div>
+                    <div class="item-date">09/2025 - Present</div>
+                </div>
+                <ul class="duties">
+                    <li>Led a team of five international student ambassadors to engage and support international students through outreach and communication</li>
+                    <li>Organized cultural events and orientations to promote campus diversity</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-title">Graduate Assistant - Special Education</div>
+                        <div class="item-subtitle">Monmouth University</div>
+                    </div>
+                    <div class="item-date">09/2024 - 07/2025</div>
+                </div>
+                <ul class="duties">
+                    <li>Conducted literature reviews on Autism and Applied Behavior Analysis (ABA)</li>
+                    <li>Assisted the IRB Chair in organizing and revising materials for compliance</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-title">Graduate Assistant - School of Education</div>
+                        <div class="item-subtitle">Monmouth University</div>
+                    </div>
+                    <div class="item-date">05/2024 - 07/2024</div>
+                </div>
+                <ul class="duties">
+                    <li>Answered phone calls and assisted students in the Dean's office by recording issues and providing support or referrals</li>
+                    <li>Assisted the Dean and faculty with data analysis and management of student information to support academic initiatives</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-title">Graduate Assistant - School of Nursing and Health Studies</div>
+                        <div class="item-subtitle">Monmouth University</div>
+                    </div>
+                    <div class="item-date">03/2024 - Present</div>
+                </div>
+                <ul class="duties">
+                    <li>Helped organize the 2024 Student Scholarship Week and other academic events to promote research and student engagement</li>
+                    <li>Collaborated with faculty to gather information, promote events, and support the Undergraduate Student Ambassador Program</li>
+                </ul>
+            </div>
+
+            <div class="experience-item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-title">International Front Desk Assistant</div>
+                        <div class="item-subtitle">Monmouth University - Global Education Office</div>
+                    </div>
+                    <div class="item-date">09/2023 - 01/2025</div>
+                </div>
+                <ul class="duties">
+                    <li>Answered and directed calls, took messages, and managed outgoing calls</li>
+                    <li>Assisted in organizing and supporting special events like International Education Week and Student Outreach events</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="publications" class="section">
+            <h2>Publications</h2>
+            <div class="publication">
+                <strong style="color: #da70d6; font-size: 1.2rem;">CyberGLA: Protection Against Advanced AI-Powered Phishing Threats</strong><br>
+                <em style="color: #b19cd9;">Weihao Qu, Gurmeet Singh, Daniel Crawford, Bingjun Li, Jalen Smith</em><br>
+                <span style="color: #e6e6fa;">The 29th Colloquium for Information Systems Security Education (CISSE 2025) - Accepted</span>
+            </div>
+        </section>
+
+        <section id="awards" class="section">
+            <h2>Awards & Recognition</h2>
+            <div class="award">
+                <div class="award-title">Dean's Award Of Excellence in Completed Research or Research in Progress</div>
+                <div class="item-date">April 23, 2024</div>
+            </div>
+        </section>
+
+        <footer>
+            <p>✨ © 2025 Bingjun Li. All rights reserved. ✨</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">Crafted with passion and creativity</p>
+        </footer>
+    </div>
+
+    <script>
+        // Create animated stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = Math.random() * 3 + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        createStars();
+
+        // Smooth scroll function
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Mouse move particle effect
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() > 0.8) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = e.clientX + 'px';
+                particle.style.top = e.clientY + 'px';
+                document.body.appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.remove();
+                }, 3000);
+            }
+        });
+
+        // Download resume function
+        function downloadResume() {
+            const resumeContent = `
+BINGJUN LI
+Eatontown, New Jersey, 07724
+s1363772@monmouth.edu | 732-841-9801
+
+EDUCATION
+
+Monmouth University, West Long Branch, NJ                                   Fall 2023 - Present
+M.S.Ed. Student Affairs and College Counseling
+
+Changchun University of Technology, Jilin, China                            09/2018 - 06/2022
+B.A. English
+
+AWARD
+
+Dean's Award Of Excellence in Completed Research or Research in Progress    04/23/2024
+
+PUBLICATION
+
+Weihao Qu, Gurmeet Singh, Daniel Crawford, Bingjun Li, Jalen Smith. 
+CyberGLA: Protection Against Advanced AI-Powered Phishing Threats. 
+The 29th Colloquium for Information Systems Security Education (CISSE 2025) (Accepted)
+
+PROFESSIONAL EXPERIENCE
+
+Student Affairs and College Counseling Intern                               01/2025 - Present
+Monmouth University - First Year Advising Office
+• Assisted students with check-in, course registration, schedule adjustments, and understanding degree requirements
+• Collaborated with advisors and departments to develop effective advising strategies
+
+Graduate Assistant - Global Education                                      09/2025 - Present
+Monmouth University
+• Led a team of five international student ambassadors to engage and support international students through outreach and communication
+• Organized cultural events and orientations to promote campus diversity
+
+Graduate Assistant - Special Education                                     09/2024 - 07/2025
+Monmouth University
+• Conducted literature reviews on Autism and Applied Behavior Analysis (ABA)
+• Assisted the IRB Chair in organizing and revising materials for compliance
+
+Graduate Assistant - School of Education                                   05/2024 - 07/2024
+Monmouth University
+• Answered phone calls and assisted students in the Dean's office by recording issues and providing support or referrals
+• Assisted the Dean and faculty with data analysis and management of student information to support academic initiatives
+
+Graduate Assistant - School of Nursing and Health Studies                  03/2024 - Present
+Monmouth University
+• Helped organize the 2024 Student Scholarship Week and other academic events to promote research and student engagement
+• Collaborated with faculty to gather information, promote events, and support the Undergraduate Student Ambassador Program
+
+International Front Desk Assistant                                         09/2023 - 01/2025
+Monmouth University - Global Education Office
+• Answered and directed calls, took messages, and managed outgoing calls
+• Assisted in organizing and supporting special events like International Education Week and Student Outreach events
+            `;
+
+            // Create a blob with the resume content
+            const blob = new Blob([resumeContent], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            
+            // Create a temporary link and trigger download
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Bingjun_Li_Resume.txt';
+            document.body.appendChild(a);
+            a.click();
+            
+            // Cleanup
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+            
+            // Show success message
+            showNotification();
+        }
+
+        // Show download notification
+        function showNotification() {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(45deg, #8a2be2, #da70d6);
+                color: white;
+                padding: 20px 30px;
+                border-radius: 15px;
+                box-shadow: 0 8px 25px rgba(138, 43, 226, 0.6);
+                z-index: 1000;
+                animation: slideInRight 0.5s ease;
+                border: 2px solid rgba(255, 255, 255, 0.3);
+            `;
+            notification.innerHTML = '✅ Resume downloaded successfully!';
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.5s ease';
+                setTimeout(() => notification.remove(), 500);
+            }, 3000);
+        }
+
+        // Add notification animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(400px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            @keyframes slideOutRight {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(400px);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Intersection observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
