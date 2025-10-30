@@ -15,12 +15,12 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: #fff;
-            background: #1a0a1f;
+            background: #fff;
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* Animated background */
+        /* Animated rainbow background */
         .bg-animation {
             position: fixed;
             top: 0;
@@ -28,9 +28,9 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: linear-gradient(45deg, #ff1493, #ff69b4, #ffc0cb, #ff1493);
+            background: linear-gradient(45deg, #ff6b9d, #c06c84, #6c5b7b, #355c7d, #2a9d8f, #e9c46a, #f4a261, #e76f51, #ff6b9d);
             background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
+            animation: rainbowShift 10s ease infinite;
         }
 
         .stars {
@@ -44,12 +44,39 @@
 
         .star {
             position: absolute;
-            background: white;
+            background: linear-gradient(45deg, #ffd700, #ff69b4, #00ffff);
             border-radius: 50%;
-            animation: twinkle 3s infinite;
+            animation: twinkle 2s infinite, rainbow 3s infinite;
         }
 
-        @keyframes gradientShift {
+        .kitty-float {
+            position: fixed;
+            width: 80px;
+            height: 80px;
+            z-index: 1;
+            animation: floatAround 20s ease-in-out infinite;
+            opacity: 0.7;
+            transition: all 0.3s;
+        }
+
+        .kitty-float:hover {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .kitty-1 {
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .kitty-2 {
+            top: 60%;
+            right: 5%;
+            animation-delay: 5s;
+        }
+
+        @keyframes rainbowShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
@@ -57,7 +84,22 @@
 
         @keyframes twinkle {
             0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.2); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        @keyframes rainbow {
+            0% { background: #ff6b9d; }
+            25% { background: #ffd700; }
+            50% { background: #00ffff; }
+            75% { background: #ff69b4; }
+            100% { background: #ff6b9d; }
+        }
+
+        @keyframes floatAround {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, -50px) rotate(10deg); }
+            50% { transform: translate(-30px, -80px) rotate(-10deg); }
+            75% { transform: translate(-50px, -30px) rotate(5deg); }
         }
 
         @keyframes float {
@@ -66,8 +108,8 @@
         }
 
         @keyframes glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(255, 20, 147, 0.5); }
-            50% { box-shadow: 0 0 40px rgba(255, 20, 147, 0.8), 0 0 60px rgba(255, 105, 180, 0.6); }
+            0%, 100% { box-shadow: 0 0 30px rgba(255, 107, 157, 0.8), 0 0 50px rgba(192, 108, 132, 0.6); }
+            50% { box-shadow: 0 0 50px rgba(255, 215, 0, 0.8), 0 0 80px rgba(255, 105, 180, 0.8); }
         }
 
         .container {
@@ -79,15 +121,19 @@
         }
 
         header {
-            background: rgba(255, 20, 147, 0.15);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             padding: 3rem;
-            border-radius: 25px;
+            border-radius: 30px;
             margin-bottom: 2rem;
-            border: 2px solid rgba(255, 105, 180, 0.4);
-            box-shadow: 0 8px 32px rgba(255, 20, 147, 0.3), inset 0 0 50px rgba(255, 105, 180, 0.1);
+            border: 4px solid transparent;
+            background-image: linear-gradient(white, white), 
+                            linear-gradient(45deg, #ff6b9d, #ffd700, #00ffff, #ff69b4);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            box-shadow: 0 10px 40px rgba(255, 107, 157, 0.4), inset 0 0 50px rgba(255, 215, 0, 0.1);
             text-align: center;
-            animation: fadeInDown 0.8s ease, glow 3s infinite;
+            animation: fadeInDown 0.8s ease, glow 4s infinite;
             position: relative;
             overflow: hidden;
         }
@@ -99,8 +145,8 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255, 105, 180, 0.15) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
+            background: conic-gradient(from 0deg, transparent, rgba(255, 215, 0, 0.3), transparent 30%);
+            animation: rotate 8s linear infinite;
         }
 
         @keyframes rotate {
@@ -109,45 +155,30 @@
         }
 
         h1 {
-            background: linear-gradient(45deg, #ff1493, #ff69b4, #ffb6c1, #ff1493);
+            background: linear-gradient(45deg, #ff6b9d, #ffd700, #00ffff, #ff69b4, #ff6b9d);
             background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 0.5rem;
-            animation: gradientShift 5s ease infinite;
+            animation: rainbowShift 5s ease infinite;
             position: relative;
             z-index: 1;
-            text-shadow: 0 0 30px rgba(255, 20, 147, 0.5);
+            text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            font-weight: bold;
         }
 
         .tagline {
-            font-size: 1.2rem;
-            color: #ffb6c1;
+            font-size: 1.3rem;
+            background: linear-gradient(45deg, #ff6b9d, #c06c84, #6c5b7b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-top: 1rem;
             position: relative;
             z-index: 1;
-        }
-
-        .kitty-decoration {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            opacity: 0.9;
-            animation: float 3s ease-in-out infinite;
-            z-index: 10;
-        }
-
-        .kitty-left {
-            top: 20px;
-            left: 20px;
-        }
-
-        .kitty-right {
-            top: 20px;
-            right: 20px;
-            animation-delay: 1.5s;
+            font-weight: 600;
         }
 
         .contact-info {
@@ -156,51 +187,52 @@
             flex-wrap: wrap;
             gap: 25px;
             margin-top: 1.5rem;
-            color: #ffb6c1;
             position: relative;
             z-index: 1;
         }
 
         .contact-info span {
-            background: rgba(255, 20, 147, 0.2);
-            padding: 8px 15px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 105, 180, 0.4);
+            background: linear-gradient(135deg, #ff6b9d, #ffd700);
+            padding: 10px 20px;
+            border-radius: 25px;
+            border: 3px solid rgba(255, 215, 0, 0.5);
             transition: all 0.3s;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.4);
         }
 
         .contact-info span:hover {
-            background: rgba(255, 20, 147, 0.4);
-            transform: translateY(-3px);
+            background: linear-gradient(135deg, #ffd700, #00ffff);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6);
         }
 
         .contact-info a {
-            color: #ff69b4;
+            color: white;
             text-decoration: none;
             transition: color 0.3s;
-        }
-
-        .contact-info a:hover {
-            color: #ff1493;
         }
 
         .download-btn {
             display: inline-block;
             margin-top: 1.5rem;
-            padding: 15px 40px;
-            background: linear-gradient(45deg, #ff1493, #ff69b4);
+            padding: 18px 45px;
+            background: linear-gradient(45deg, #ff6b9d, #ffd700, #00ffff);
+            background-size: 200% 200%;
             color: white;
             text-decoration: none;
-            border-radius: 30px;
+            border-radius: 35px;
             font-weight: bold;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             transition: all 0.3s;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            border: 3px solid white;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.4);
+            box-shadow: 0 6px 20px rgba(255, 107, 157, 0.5);
             position: relative;
             z-index: 1;
             overflow: hidden;
+            animation: rainbowShift 3s ease infinite;
         }
 
         .download-btn::before {
@@ -211,19 +243,19 @@
             width: 0;
             height: 0;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.5);
             transform: translate(-50%, -50%);
             transition: width 0.6s, height 0.6s;
         }
 
         .download-btn:hover::before {
-            width: 300px;
-            height: 300px;
+            width: 400px;
+            height: 400px;
         }
 
         .download-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.6);
+            transform: translateY(-8px) scale(1.1);
+            box-shadow: 0 12px 35px rgba(255, 215, 0, 0.7);
         }
 
         .download-btn span {
@@ -232,13 +264,17 @@
         }
 
         nav {
-            background: rgba(255, 20, 147, 0.15);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             padding: 1.5rem;
-            border-radius: 25px;
+            border-radius: 30px;
             margin-bottom: 2rem;
-            border: 2px solid rgba(255, 105, 180, 0.4);
-            box-shadow: 0 4px 20px rgba(255, 20, 147, 0.3);
+            border: 4px solid transparent;
+            background-image: linear-gradient(white, white), 
+                            linear-gradient(45deg, #ff6b9d, #ffd700, #00ffff);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            box-shadow: 0 6px 25px rgba(255, 107, 157, 0.3);
             position: sticky;
             top: 20px;
             z-index: 100;
@@ -254,13 +290,17 @@
         }
 
         nav a {
-            color: #ffb6c1;
+            background: linear-gradient(45deg, #ff6b9d, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 1.1rem;
             transition: all 0.3s;
             cursor: pointer;
-            padding: 8px 20px;
-            border-radius: 15px;
+            padding: 10px 25px;
+            border-radius: 20px;
             position: relative;
         }
 
@@ -270,29 +310,36 @@
             bottom: 0;
             left: 50%;
             width: 0;
-            height: 2px;
-            background: linear-gradient(45deg, #ff1493, #ff69b4);
+            height: 3px;
+            background: linear-gradient(45deg, #ff6b9d, #ffd700, #00ffff);
             transition: all 0.3s;
             transform: translateX(-50%);
+            border-radius: 3px;
         }
 
         nav a:hover {
-            color: #ff1493;
-            background: rgba(255, 20, 147, 0.2);
+            background: linear-gradient(45deg, #ffd700, #00ffff, #ff69b4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         nav a:hover::after {
-            width: 80%;
+            width: 90%;
         }
 
         .section {
-            background: rgba(255, 20, 147, 0.15);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             padding: 2.5rem;
-            border-radius: 25px;
+            border-radius: 30px;
             margin-bottom: 2rem;
-            border: 2px solid rgba(255, 105, 180, 0.4);
-            box-shadow: 0 8px 32px rgba(255, 20, 147, 0.3);
+            border: 4px solid transparent;
+            background-image: linear-gradient(white, white), 
+                            linear-gradient(45deg, #ff6b9d, #ffd700, #00ffff, #ff69b4);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            box-shadow: 0 10px 35px rgba(255, 107, 157, 0.3);
             animation: fadeInUp 0.8s ease;
             position: relative;
             overflow: hidden;
@@ -305,8 +352,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 105, 180, 0.2), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            transition: left 0.7s;
         }
 
         .section:hover::before {
@@ -314,39 +361,42 @@
         }
 
         h2 {
-            background: linear-gradient(45deg, #ff1493, #ff69b4, #ffb6c1);
+            background: linear-gradient(45deg, #ff6b9d, #ffd700, #00ffff, #ff69b4);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 2rem;
-            font-size: 2.2rem;
-            border-bottom: 3px solid rgba(255, 20, 147, 0.5);
-            padding-bottom: 0.8rem;
+            font-size: 2.5rem;
+            border-bottom: 4px solid transparent;
+            border-image: linear-gradient(45deg, #ff6b9d, #ffd700, #00ffff) 1;
+            padding-bottom: 1rem;
             position: relative;
+            font-weight: bold;
         }
 
         h2::after {
             content: '';
             position: absolute;
-            bottom: -3px;
+            bottom: -4px;
             left: 0;
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(45deg, #ffb6c1, #ff69b4);
+            width: 150px;
+            height: 4px;
+            background: linear-gradient(45deg, #ffd700, #00ffff, #ff69b4);
             animation: slideRight 2s ease infinite;
+            border-radius: 2px;
         }
 
         @keyframes slideRight {
             0%, 100% { left: 0; }
-            50% { left: calc(100% - 100px); }
+            50% { left: calc(100% - 150px); }
         }
 
         .experience-item, .education-item {
             margin-bottom: 2rem;
             padding: 2rem;
-            background: linear-gradient(135deg, rgba(255, 20, 147, 0.15) 0%, rgba(255, 105, 180, 0.1) 100%);
-            border-radius: 20px;
-            border-left: 5px solid #ff1493;
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.15) 0%, rgba(255, 215, 0, 0.15) 50%, rgba(0, 255, 255, 0.15) 100%);
+            border-radius: 25px;
+            border-left: 6px solid #ff6b9d;
             transition: all 0.4s;
             position: relative;
             overflow: hidden;
@@ -359,7 +409,7 @@
             left: 0;
             width: 0;
             height: 100%;
-            background: linear-gradient(90deg, rgba(255, 105, 180, 0.25), transparent);
+            background: linear-gradient(90deg, rgba(255, 215, 0, 0.2), transparent);
             transition: width 0.4s;
         }
 
@@ -369,8 +419,8 @@
 
         .experience-item:hover, .education-item:hover {
             transform: translateX(15px) scale(1.02);
-            box-shadow: 0 8px 30px rgba(255, 20, 147, 0.4);
-            border-left-color: #ff69b4;
+            box-shadow: 0 12px 40px rgba(255, 107, 157, 0.4);
+            border-left-color: #ffd700;
         }
 
         .item-header {
@@ -384,26 +434,30 @@
         }
 
         .item-title {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: bold;
-            color: #ff69b4;
-            text-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+            background: linear-gradient(45deg, #ff6b9d, #c06c84);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .item-subtitle {
             font-style: italic;
-            color: #ffb6c1;
+            color: #6c5b7b;
             margin-top: 0.3rem;
+            font-weight: 600;
         }
 
         .item-date {
-            color: #ff1493;
-            font-weight: 600;
+            background: linear-gradient(45deg, #ff6b9d, #ffd700);
+            color: white;
+            font-weight: 700;
             white-space: nowrap;
-            background: rgba(255, 20, 147, 0.2);
-            padding: 5px 15px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 105, 180, 0.4);
+            padding: 8px 20px;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
         }
 
         ul.duties {
@@ -417,35 +471,39 @@
             padding-left: 2rem;
             margin-bottom: 0.8rem;
             position: relative;
-            color: #e6e6fa;
+            color: #355c7d;
             transition: all 0.3s;
+            font-weight: 500;
         }
 
         ul.duties li:hover {
-            color: #fff;
-            transform: translateX(5px);
+            color: #ff6b9d;
+            transform: translateX(10px);
         }
 
         ul.duties li:before {
-            content: "✦";
+            content: "★";
             position: absolute;
             left: 0;
-            color: #ff1493;
+            background: linear-gradient(45deg, #ff6b9d, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.3); opacity: 0.7; }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.4); }
         }
 
         .publication {
             padding: 2rem;
-            background: linear-gradient(135deg, rgba(255, 182, 193, 0.25) 0%, rgba(255, 20, 147, 0.2) 100%);
-            border-radius: 20px;
-            border: 2px solid rgba(255, 105, 180, 0.4);
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.2) 0%, rgba(255, 215, 0, 0.2) 100%);
+            border-radius: 25px;
+            border: 3px solid rgba(255, 107, 157, 0.4);
             margin-bottom: 1rem;
             transition: all 0.3s;
             position: relative;
@@ -457,62 +515,78 @@
             position: absolute;
             right: 20px;
             top: 20px;
-            font-size: 3rem;
-            opacity: 0.1;
+            font-size: 4rem;
+            opacity: 0.15;
             transition: all 0.3s;
         }
 
         .publication:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 30px rgba(255, 20, 147, 0.4);
+            transform: scale(1.03);
+            box-shadow: 0 12px 40px rgba(255, 107, 157, 0.5);
         }
 
         .publication:hover::after {
-            opacity: 0.3;
-            transform: rotate(10deg);
+            opacity: 0.4;
+            transform: rotate(15deg) scale(1.2);
         }
 
         .award {
-            padding: 2rem;
-            background: linear-gradient(135deg, rgba(255, 182, 193, 0.25) 0%, rgba(255, 105, 180, 0.25) 100%);
-            border-radius: 20px;
+            padding: 2.5rem;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.3) 0%, rgba(255, 107, 157, 0.3) 100%);
+            border-radius: 25px;
             text-align: center;
-            font-size: 1.1rem;
-            border: 2px solid rgba(255, 105, 180, 0.4);
+            font-size: 1.2rem;
+            border: 3px solid rgba(255, 215, 0, 0.5);
             position: relative;
             overflow: hidden;
             animation: float 3s ease-in-out infinite;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
         }
 
         .award::before {
             content: '🏆';
             position: absolute;
-            font-size: 8rem;
-            opacity: 0.05;
+            font-size: 10rem;
+            opacity: 0.1;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            animation: rotate 10s linear infinite;
         }
 
         .award-title {
             font-weight: bold;
-            color: #ff1493;
+            background: linear-gradient(45deg, #ff6b9d, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 0.5rem;
             position: relative;
             z-index: 1;
-            text-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+            font-size: 1.3rem;
         }
 
         footer {
             text-align: center;
             padding: 3rem;
-            color: #ffb6c1;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 30px;
+            border: 4px solid transparent;
+            background-image: linear-gradient(white, white), 
+                            linear-gradient(45deg, #ff6b9d, #ffd700, #00ffff);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
             margin-top: 2rem;
-            background: rgba(255, 20, 147, 0.1);
-            border-radius: 25px;
-            border: 2px solid rgba(255, 105, 180, 0.3);
-        }radius: 25px;
-            border: 2px solid rgba(138, 43, 226, 0.2);
+            box-shadow: 0 8px 30px rgba(255, 107, 157, 0.3);
+        }
+
+        footer p {
+            background: linear-gradient(45deg, #ff6b9d, #c06c84, #6c5b7b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+            font-size: 1.1rem;
         }
 
         @keyframes fadeInDown {
@@ -544,9 +618,8 @@
 
         .particle {
             position: fixed;
-            width: 4px;
-            height: 4px;
-            background: rgba(138, 43, 226, 0.5);
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
             pointer-events: none;
             animation: particleFloat 3s ease-in-out infinite;
@@ -555,12 +628,12 @@
         @keyframes particleFloat {
             0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
             50% { opacity: 1; }
-            100% { transform: translateY(-100px) translateX(50px); opacity: 0; }
+            100% { transform: translateY(-150px) translateX(80px); opacity: 0; }
         }
 
         @media (max-width: 768px) {
             h1 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
 
             .contact-info {
@@ -581,6 +654,11 @@
             .item-date {
                 margin-top: 0.5rem;
             }
+
+            .kitty-float {
+                width: 60px;
+                height: 60px;
+            }
         }
     </style>
 </head>
@@ -588,18 +666,36 @@
     <div class="bg-animation"></div>
     <div class="stars" id="stars"></div>
     
+    <!-- Floating Hello Kitty images -->
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='80' fill='white'/%3E%3Ccircle cx='70' cy='90' r='8' fill='black'/%3E%3Ccircle cx='130' cy='90' r='8' fill='black'/%3E%3Ccircle cx='100' cy='110' r='5' fill='%23FFD700'/%3E%3Cellipse cx='60' cy='70' rx='25' ry='30' fill='white'/%3E%3Cellipse cx='140' cy='70' rx='25' ry='30' fill='white'/%3E%3Cellipse cx='100' cy='40' rx='30' ry='20' fill='%23FF1493'/%3E%3C/svg%3E" class="kitty-float kitty-1" alt="Hello Kitty">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ccircle cx='100' cy='100' r='80' fill='white'/%3E%3Ccircle cx='70' cy='90' r='8' fill='black'/%3E%3Ccircle cx='130' cy='90' r='8' fill='black'/%3E%3Ccircle cx='100' cy='110' r='5' fill='%23FFD700'/%3E%3Cellipse cx='60' cy='70' rx='25' ry='30' fill='white'/%3E%3Cellipse cx='140' cy='70' rx='25' ry='30' fill='white'/%3E%3Cellipse cx='100' cy='40' rx='30' ry='20' fill='%23FF69B4'/%3E%3Ccircle cx='140' cy='140' r='25' fill='%23FF1493'/%3E%3C/svg%3E" class="kitty-float kitty-2" alt="Hello Kitty">
+    
     <div class="container">
         <header>
-            <h1>✨ Bingjun Li ✨</h1>
-            <p class="tagline">Student Affairs & College Counseling Professional</p>
-            <div class="contact-info">
-                <span>📍 Eatontown, New Jersey</span>
-                <span>📧 <a href="mailto:s1363772@monmouth.edu">s1363772@monmouth.edu</a></span>
-                <span>📱 <a href="tel:732-841-9801">732-841-9801</a></span>
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; position: relative; z-index: 1;">
+                <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/dcb5f0e5-306a-45a8-8a79-6e7073a33376/d6uvo9y-4bcfa515-0639-4766-af97-c3c60fb1839c.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiIvZi9kY2I1ZjBlNS0zMDZhLTQ1YTgtOGE3OS02ZTcwNzNhMzMzNzYvZDZ1dm85eS00YmNmYTUxNS0wNjM5LTQ3NjYtYWY5Ny1jM2M2MGZiMTgzOWMuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.KwPXdn5P6NVLyaVGYpQXO87mcWw_GZ91RLFiITRmvWM" 
+                     alt="Hello Kitty" 
+                     style="width: 100px; height: 100px; filter: drop-shadow(0 4px 15px rgba(255, 105, 180, 0.6));"
+                     onerror="this.style.display='none'">
+                
+                <div style="flex: 1; text-align: center;">
+                    <h1>✨ Bingjun Li ✨</h1>
+                    <p class="tagline">Student Affairs & College Counseling Professional</p>
+                    <div class="contact-info">
+                        <span>📍 Eatontown, New Jersey</span>
+                        <span>📧 <a href="mailto:s1363772@monmouth.edu">s1363772@monmouth.edu</a></span>
+                        <span>📱 <a href="tel:732-841-9801">732-841-9801</a></span>
+                    </div>
+                    <button class="download-btn" onclick="downloadResume()">
+                        <span>📄 Download My Resume</span>
+                    </button>
+                </div>
+                
+                <img src="https://i.imgur.com/placeholder-cat.gif" 
+                     alt="Dancing Cat" 
+                     style="width: 100px; height: 100px; filter: drop-shadow(0 4px 15px rgba(192, 192, 192, 0.6));"
+                     onerror="this.style.display='none'">
             </div>
-            <button class="download-btn" onclick="downloadResume()">
-                <span>📄 Download My Resume</span>
-            </button>
         </header>
 
         <nav>
@@ -614,7 +710,7 @@
 
         <section id="about" class="section">
             <h2>About Me</h2>
-            <p style="font-size: 1.2rem; line-height: 1.9; color: #e6e6fa;">
+            <p style="font-size: 1.2rem; line-height: 1.9; color: #355c7d; font-weight: 500;">
                 Graduate student pursuing M.S.Ed. in Student Affairs and College Counseling at Monmouth University. 
                 Passionate about supporting student success through advising, international education, and research. 
                 Experienced in coordinating student programs, conducting research on cybersecurity and education, 
@@ -629,7 +725,7 @@
                     <div>
                         <div class="item-title">Monmouth University</div>
                         <div class="item-subtitle">M.S.Ed. Student Affairs and College Counseling</div>
-                        <div style="color: #b19cd9; margin-top: 0.3rem;">📍 West Long Branch, NJ</div>
+                        <div style="color: #6c5b7b; margin-top: 0.3rem; font-weight: 600;">📍 West Long Branch, NJ</div>
                     </div>
                     <div class="item-date">Fall 2023 - Present</div>
                 </div>
@@ -639,7 +735,7 @@
                     <div>
                         <div class="item-title">Changchun University of Technology</div>
                         <div class="item-subtitle">B.A. English</div>
-                        <div style="color: #b19cd9; margin-top: 0.3rem;">📍 Jilin, China</div>
+                        <div style="color: #6c5b7b; margin-top: 0.3rem; font-weight: 600;">📍 Jilin, China</div>
                     </div>
                     <div class="item-date">09/2018 - 06/2022</div>
                 </div>
@@ -737,9 +833,9 @@
         <section id="publications" class="section">
             <h2>Publications</h2>
             <div class="publication">
-                <strong style="color: #da70d6; font-size: 1.2rem;">CyberGLA: Protection Against Advanced AI-Powered Phishing Threats</strong><br>
-                <em style="color: #b19cd9;">Weihao Qu, Gurmeet Singh, Daniel Crawford, Bingjun Li, Jalen Smith</em><br>
-                <span style="color: #e6e6fa;">The 29th Colloquium for Information Systems Security Education (CISSE 2025) - Accepted</span>
+                <strong style="color: #ff6b9d; font-size: 1.3rem;">CyberGLA: Protection Against Advanced AI-Powered Phishing Threats</strong><br>
+                <em style="color: #6c5b7b; font-weight: 600;">Weihao Qu, Gurmeet Singh, Daniel Crawford, Bingjun Li, Jalen Smith</em><br>
+                <span style="color: #355c7d; font-weight: 500;">The 29th Colloquium for Information Systems Security Education (CISSE 2025) - Accepted</span>
             </div>
         </section>
 
@@ -747,28 +843,31 @@
             <h2>Awards & Recognition</h2>
             <div class="award">
                 <div class="award-title">Dean's Award Of Excellence in Completed Research or Research in Progress</div>
-                <div class="item-date">April 23, 2024</div>
+                <div class="item-date" style="margin-top: 1rem;">April 23, 2024</div>
             </div>
         </section>
 
         <footer>
             <p>✨ © 2025 Bingjun Li. All rights reserved. ✨</p>
-            <p style="margin-top: 1rem; font-size: 0.9rem;">Crafted with passion and creativity</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">Crafted with passion and creativity 🌈</p>
         </footer>
     </div>
 
     <script>
-        // Create animated stars
+        // Create colorful animated stars
         function createStars() {
             const starsContainer = document.getElementById('stars');
-            for (let i = 0; i < 100; i++) {
+            const colors = ['#ff6b9d', '#ffd700', '#00ffff', '#ff69b4', '#e76f51'];
+            for (let i = 0; i < 150; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
-                star.style.width = Math.random() * 3 + 'px';
-                star.style.height = star.style.width;
+                const size = Math.random() * 4 + 2;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
                 star.style.left = Math.random() * 100 + '%';
                 star.style.top = Math.random() * 100 + '%';
                 star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.background = colors[Math.floor(Math.random() * colors.length)];
                 starsContainer.appendChild(star);
             }
         }
@@ -783,25 +882,31 @@
             }
         }
 
-        // Mouse move particle effect
+        // Mouse move colorful particle effect
+        let particleCount = 0;
+        const maxParticles = 50;
+        const colors = ['#ff6b9d', '#ffd700', '#00ffff', '#ff69b4', '#e76f51', '#2a9d8f'];
+
         document.addEventListener('mousemove', (e) => {
-            if (Math.random() > 0.8) {
+            if (Math.random() > 0.7 && particleCount < maxParticles) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 particle.style.left = e.clientX + 'px';
                 particle.style.top = e.clientY + 'px';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
                 document.body.appendChild(particle);
+                particleCount++;
                 
                 setTimeout(() => {
                     particle.remove();
+                    particleCount--;
                 }, 3000);
             }
         });
 
         // Download resume function
         function downloadResume() {
-            const resumeContent = `
-BINGJUN LI
+            const resumeContent = `BINGJUN LI
 Eatontown, New Jersey, 07724
 s1363772@monmouth.edu | 732-841-9801
 
@@ -853,8 +958,7 @@ Monmouth University
 International Front Desk Assistant                                         09/2023 - 01/2025
 Monmouth University - Global Education Office
 • Answered and directed calls, took messages, and managed outgoing calls
-• Assisted in organizing and supporting special events like International Education Week and Student Outreach events
-            `;
+• Assisted in organizing and supporting special events like International Education Week and Student Outreach events`;
 
             // Create a blob with the resume content
             const blob = new Blob([resumeContent], { type: 'text/plain' });
@@ -875,23 +979,25 @@ Monmouth University - Global Education Office
             showNotification();
         }
 
-        // Show download notification
+        // Show download notification with rainbow colors
         function showNotification() {
             const notification = document.createElement('div');
             notification.style.cssText = `
                 position: fixed;
                 top: 20px;
                 right: 20px;
-                background: linear-gradient(45deg, #8a2be2, #da70d6);
+                background: linear-gradient(45deg, #ff6b9d, #ffd700, #00ffff);
                 color: white;
                 padding: 20px 30px;
-                border-radius: 15px;
-                box-shadow: 0 8px 25px rgba(138, 43, 226, 0.6);
+                border-radius: 20px;
+                box-shadow: 0 8px 25px rgba(255, 107, 157, 0.6);
                 z-index: 1000;
                 animation: slideInRight 0.5s ease;
-                border: 2px solid rgba(255, 255, 255, 0.3);
+                border: 3px solid white;
+                font-weight: bold;
+                font-size: 1.1rem;
             `;
-            notification.innerHTML = '✅ Resume downloaded successfully!';
+            notification.innerHTML = '✅ Resume downloaded successfully! 🎉';
             document.body.appendChild(notification);
             
             setTimeout(() => {
